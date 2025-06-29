@@ -2,12 +2,13 @@ import { Suspense } from 'react'
 import PropertyFeedbackForm from './PropertyFeedbackForm'
 
 interface PropertyFeedbackPageProps {
-  params: {
+  params: Promise<{
     propertyId: string
-  }
+  }>
 }
 
-export default function PropertyFeedbackPage({ params }: PropertyFeedbackPageProps) {
+export default async function PropertyFeedbackPage({ params }: PropertyFeedbackPageProps) {
+  const { propertyId } = await params
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md mx-auto">
@@ -26,7 +27,7 @@ export default function PropertyFeedbackPage({ params }: PropertyFeedbackPagePro
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
             </div>
           }>
-            <PropertyFeedbackForm propertyId={params.propertyId} />
+            <PropertyFeedbackForm propertyId={propertyId} />
           </Suspense>
         </div>
 

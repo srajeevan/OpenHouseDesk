@@ -55,7 +55,7 @@ export default function AdminLoginForm() {
               created_at: new Date().toISOString()
             }
             
-            const { data: insertData, error: insertError } = await supabase
+            const { error: insertError } = await supabase
               .from('admins')
               .insert([adminRecord])
               .select()
@@ -161,9 +161,10 @@ export default function AdminLoginForm() {
           router.push('/admin/dashboard')
         }
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Auth error:', error)
-      toast.error(error.message || 'Authentication failed. Please try again.')
+      const errorMessage = error instanceof Error ? error.message : 'Authentication failed. Please try again.'
+      toast.error(errorMessage)
     } finally {
       setIsSubmitting(false)
     }

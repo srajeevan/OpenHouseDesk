@@ -9,9 +9,7 @@ import {
   campaignSchemaWithConditionals, 
   type CampaignFormDataWithConditionals,
   AVAILABLE_TEMPLATE_VARIABLES,
-  TEMPLATE_VARIABLE_DESCRIPTIONS,
-  extractTemplateVariables,
-  validateTemplateVariables
+  TEMPLATE_VARIABLE_DESCRIPTIONS
 } from '@/lib/follow-up-validations'
 
 interface Campaign {
@@ -75,7 +73,7 @@ export default function FollowUpManagement() {
   const [selectedVisitors, setSelectedVisitors] = useState<string[]>([])
   const [sending, setSending] = useState(false)
   const [activeTab, setActiveTab] = useState<'campaigns' | 'logs' | 'templates'>('campaigns')
-  const [showVariableHelper, setShowVariableHelper] = useState(false)
+  const [showVariableHelper] = useState(false)
   
   const supabase = createClientComponentClient()
 
@@ -93,7 +91,7 @@ export default function FollowUpManagement() {
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchData = async () => {
     try {

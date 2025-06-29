@@ -25,8 +25,12 @@ export default function FeedbackForm() {
   } = useForm<FeedbackFormData>({
     resolver: zodResolver(feedbackSchema),
     defaultValues: {
-      rating: 0,
+      rating: 1,
       interested: false,
+      comparison_to_others: '',
+      meets_needs: '',
+      would_make_offer: '',
+      follow_up_preference: '',
     },
   })
 
@@ -106,9 +110,10 @@ export default function FeedbackForm() {
 
       toast.success('Thank you for your feedback!')
       setSubmitted(true)
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error submitting feedback:', error)
-      toast.error(error.message || 'Something went wrong. Please try again.')
+      const errorMessage = error instanceof Error ? error.message : 'Something went wrong. Please try again.'
+      toast.error(errorMessage)
     } finally {
       setIsSubmitting(false)
     }

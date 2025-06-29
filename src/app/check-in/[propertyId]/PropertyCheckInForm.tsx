@@ -39,7 +39,7 @@ export default function PropertyCheckInForm({ propertyId }: PropertyCheckInFormP
 
   useEffect(() => {
     fetchProperty()
-  }, [propertyId])
+  }, [propertyId]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchProperty = async () => {
     try {
@@ -103,9 +103,10 @@ export default function PropertyCheckInForm({ propertyId }: PropertyCheckInFormP
       
       // Redirect to thank you page with visitor and property info
       router.push(`/thank-you?visitor=${visitorData.id}&property=${property.id}&token=${visitorData.feedback_token}`)
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error during check-in:', error)
-      toast.error(error.message || 'Check-in failed. Please try again.')
+      const errorMessage = error instanceof Error ? error.message : 'Check-in failed. Please try again.'
+      toast.error(errorMessage)
     } finally {
       setIsSubmitting(false)
     }

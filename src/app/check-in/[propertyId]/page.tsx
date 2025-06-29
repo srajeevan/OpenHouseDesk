@@ -2,12 +2,13 @@ import { Suspense } from 'react'
 import PropertyCheckInForm from './PropertyCheckInForm'
 
 interface PropertyCheckInPageProps {
-  params: {
+  params: Promise<{
     propertyId: string
-  }
+  }>
 }
 
-export default function PropertyCheckInPage({ params }: PropertyCheckInPageProps) {
+export default async function PropertyCheckInPage({ params }: PropertyCheckInPageProps) {
+  const { propertyId } = await params
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md mx-auto">
@@ -26,7 +27,7 @@ export default function PropertyCheckInPage({ params }: PropertyCheckInPageProps
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
             </div>
           }>
-            <PropertyCheckInForm propertyId={params.propertyId} />
+            <PropertyCheckInForm propertyId={propertyId} />
           </Suspense>
         </div>
 

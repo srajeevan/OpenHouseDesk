@@ -78,7 +78,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     checkAuth()
     fetchData()
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const checkAuth = async () => {
     const { data: { session } } = await supabase.auth.getSession()
@@ -99,8 +99,8 @@ export default function AdminDashboard() {
         
         if (error) throw error
         visitorsData = data || []
-      } catch (viewError) {
-        console.log('View not available, fetching from visitors table directly')
+        } catch {
+          console.log('View not available, fetching from visitors table directly')
         const { data, error } = await supabase
           .from('visitors')
           .select('*')
@@ -122,7 +122,7 @@ export default function AdminDashboard() {
           throw error
         }
         propertiesData = data || []
-      } catch (propertiesError) {
+      } catch {
         console.log('Properties table not available yet')
         propertiesData = []
       }
@@ -203,9 +203,10 @@ export default function AdminDashboard() {
       setEditingProperty(null)
       propertyForm.reset()
       fetchData()
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error saving property:', error)
-      toast.error(error.message || 'Failed to save property')
+      const errorMessage = error instanceof Error ? error.message : 'Failed to save property'
+      toast.error(errorMessage)
     }
   }
 
