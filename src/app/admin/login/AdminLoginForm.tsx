@@ -283,9 +283,19 @@ export default function AdminLoginForm() {
         </button>
         
         {!isSignUp && (
-          <p className="text-sm text-gray-400">
-            Demo credentials: admin@example.com / password123
-          </p>
+          <div className="text-center space-y-2">
+            <p className="text-sm text-gray-400">
+              Demo credentials for realtors to test:
+            </p>
+            <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
+              <p className="text-sm text-blue-200 font-mono">
+                admin@openhousedesk.com
+              </p>
+              <p className="text-sm text-blue-200 font-mono">
+                890712
+              </p>
+            </div>
+          </div>
         )}
       </div>
     </form>

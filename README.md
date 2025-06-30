@@ -51,9 +51,9 @@ NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
-# Admin Configuration (optional - for demo purposes)
-ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=your-admin-password
+# Demo Admin Configuration (for realtors to test)
+ADMIN_EMAIL=admin@openhousedesk.com
+ADMIN_PASSWORD=890712
 ```
 
 ### 5. Run the Development Server
@@ -63,6 +63,25 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see the application.
+
+## 🔑 Demo Admin Account
+
+For realtors and users to test the system, a demo admin account is pre-configured:
+
+**Login URL:** `https://yourdomain.com/admin/login`  
+**Email:** `admin@openhousedesk.com`  
+**Password:** `890712`
+
+### What You Can Test:
+- ✅ **Property Management** - Add, edit, and manage properties
+- ✅ **QR Code Generation** - Create property-specific QR codes for check-ins
+- ✅ **Visitor Analytics** - View real-time visitor data and feedback
+- ✅ **Follow-up System** - Create and send email campaigns
+- ✅ **CSV Export** - Export visitor data for analysis
+- ✅ **Complete Workflow** - Test the entire visitor journey
+
+### Setup Instructions:
+See **[DEMO_ADMIN_SETUP.md](DEMO_ADMIN_SETUP.md)** for detailed setup instructions.
 
 ## Database Schema
 
